@@ -1,0 +1,45 @@
+<div class="background">
+  <div class="center-dialog">
+    <p id="fr">FR</p>
+    <div class="logo">
+      <img src="https://connect.laurentian.ca/images/laurentian.svg" >
+    </div>
+    <div class="login-card">
+      <div class="login-tagline">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="security"></mat-icon>
+        <p>Enter Username & Password</p>
+      </div>
+  
+      <form formGroup="">
+        <div class="mb-3">
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Username:">
+        </div>
+        <div class="mb-3 d-flex">
+          <input [type]="displayPass ? 'text' : 'password'" class="form-control" id="exampleFormControlInput1" placeholder="Password:">
+          <div class="password-reveal" (mousedown)="displayPassword()" (mouseup)="displayPassword()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="displayPass ? 'visibility_off' : 'visibility'"></mat-icon>
+          </div>
+        </div>
+      </form>
+  
+      <div class="center-button">
+        <button class="btn btn-primary" (click)="login()">LOGIN</button>
+      </div>
+  
+      <div class="bottom-tagline">
+        <span>
+          For security reasons, please <span id="log-out">log out</span> and exit your web browser when you are done <br> accessing services that require authentication!
+        </span>
+      </div>
+    </div>
+
+    <div class="footer-tagline">
+      <span id="connect-tagline">connect-02.laurentian.ca</span>
+      <div class="bottom-options">
+        <p>
+          <span >Forgot password?</span> | <span (click)="signUp()">New to Laurentian? </span> <span>Register here. </span> | <span>Help</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

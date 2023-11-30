@@ -1,0 +1,61 @@
+<div class="background">
+  <div class="center-dialog">
+    <!-- <p id="fr">FR</p> -->
+    <div class="logo">
+      <img src="https://my.laurentian.ca/sites/all/themes/myLaurentian/assets/img/logo_en.svg" >
+    </div>
+      <div class="signup-tagline">
+        <p>Français</p>
+      </div>
+
+      <div class="form-title">
+          <p id="p-title">Registration</p>
+          <p id="p-student">Student Number <span>*</span></p>
+          <p id="p-letter">Please refer to your <b>Laurentian University Acknowledgement</b> letter for your student number.</p>
+      </div>
+  
+      <form formGroup="">
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person"></mat-icon>
+            </div>
+          </div>
+          <input type="text" class="form-control logo-input" id="inlineFormInputGroupUsername2" placeholder="0129302">
+        </div>
+
+        <p id="p-student">Date of Birth <span>*</span></p>
+        <div class="input-group mb-2 mr-sm-2 d-flex gap-1 justify-content-between">
+          <div class="form-group col-md-3">
+            <select id="inputState" class="form-control">
+              <option selected> - Select Year - </option>
+              <option *ngFor="let year of years" [value]="year.value">{{year.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-3">
+            <select id="inputState" class="form-control">
+              <option selected> - Select Month - </option>
+              <option *ngFor="let month of months" [value]="month.value">{{month.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-3">
+            <select id="inputState" class="form-control">
+              <option selected> - Select Day - </option>
+              <option *ngFor="let day of days" [value]="day.value">{{day.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <p id="p-student">Last Name <span>*</span></p>
+        <div class="form-group col-md-12">
+          <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Doe">
+        </div>
+      </form>
+  
+      <div class="center-button right-button ">
+        <button class="btn btn-primary">LOGIN</button>
+      </div>
+  </div>
+</div>

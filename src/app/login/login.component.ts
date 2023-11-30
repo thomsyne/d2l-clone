@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class AppComponent {
-  title = 'd2l-clone';
+export class LoginComponent implements OnInit {
+
   displayPass: boolean = false;
 
   constructor(
     private readonly router: Router
   ) {}
+
+  ngOnInit() {
+  }
 
   displayPassword(){
     this.displayPass = !this.displayPass;
@@ -25,4 +28,5 @@ export class AppComponent {
   signUp(){
     this.router.navigate(['/sign-up']);
   }
+
 }
