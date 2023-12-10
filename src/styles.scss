@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
 
 body {
     margin: 0
@@ -64,7 +65,7 @@ p {
         }
 
       }
-      form {
+      .form, form {
         width: 80%;
         margin: 20px auto;
 

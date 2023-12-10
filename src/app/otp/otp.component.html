@@ -1,0 +1,48 @@
+<div class="background">
+  <div class="center-dialog">
+    <p id="fr">FR</p>
+    <div class="logo">
+      <img src="https://connect.laurentian.ca/images/laurentian.svg" >
+    </div>
+    <div class="login-card">
+
+      <div class="form">
+        <div class="mb-3 d-flex">
+          <input [(ngModel)]="otp" [type]="displayPass ? 'text' : 'password'" class="form-control" id="exampleFormControlInput1" placeholder="Token:">
+          <div class="password-reveal" (mousedown)="displayPassword()" (mouseup)="displayPassword()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="displayPass ? 'visibility_off' : 'visibility'"></mat-icon>
+          </div>
+        </div>
+      </div>
+  
+      <div class="center-button">
+        <button class="btn btn-primary" (click)="back()">CANCEL</button>
+        <button class="btn btn-primary" (click)="login()">LOGIN</button>
+      </div>
+
+      <hr/>
+
+      <h6 id="protected">Protected Account</h6>
+  
+      <div class="bottom-tagline">
+        <span>
+          Your Laurentian University account is protected using Google Authenticator. Enter your 6-digit <br/> code above to proceed with the login. You can get this code from your Google Authenticator <br/> application on your mobile device where Google Authentication is installed.
+
+          <br/>
+          <br/>
+
+          If you have lost or no longer have access to your mobile device you will need to communicate <br/> with the I.T service desk at x2200 to reset your two-factor authentication method.
+        </span>
+      </div>
+    </div>
+
+    <div class="footer-tagline">
+      <span id="connect-tagline">connect-02.laurentian.ca</span>
+      <div class="bottom-options">
+        <p>
+          <span >Forgot password?</span> | <span (click)="signUp()">New to Laurentian? </span> <span>Register here. </span> | <span>Help</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

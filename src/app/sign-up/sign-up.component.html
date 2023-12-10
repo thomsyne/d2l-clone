@@ -14,53 +14,61 @@
           <p id="p-letter">Please refer to your <b>Laurentian University Acknowledgement</b> letter for your student number.</p>
       </div>
   
-      <form formGroup="">
+      <form [formGroup]="signUpForm">
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">
-              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person"></mat-icon>
+              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="mail"></mat-icon>
             </div>
           </div>
-          <input type="text" class="form-control logo-input" id="inlineFormInputGroupUsername2" placeholder="0129302">
+          <input formControlName="email" type="email" class="form-control logo-input" id="email" placeholder="johndoe@gmail.com">
         </div>
 
         <p id="p-student">Date of Birth <span>*</span></p>
         <div class="input-group mb-2 mr-sm-2 d-flex gap-1 justify-content-between">
           <div class="form-group col-md-3">
-            <select id="inputState" class="form-control">
-              <option selected> - Select Year - </option>
+            <select formControlName="year" id="year" class="form-control">
+              <option value="" selected> - Select Year - </option>
               <option *ngFor="let year of years" [value]="year.value">{{year.name}}</option>
             </select>
           </div>
 
           <div class="form-group col-md-3">
-            <select id="inputState" class="form-control">
-              <option selected> - Select Month - </option>
+            <select formControlName="month" id="month" class="form-control">
+              <option value="" selected> - Select Month - </option>
               <option *ngFor="let month of months" [value]="month.value">{{month.name}}</option>
             </select>
           </div>
 
           <div class="form-group col-md-3">
-            <select id="inputState" class="form-control">
-              <option selected> - Select Day - </option>
+            <select formControlName="day" id="day" class="form-control">
+              <option value="" selected> - Select Day - </option>
               <option *ngFor="let day of days" [value]="day.value">{{day.name}}</option>
             </select>
           </div>
         </div>
 
-        <p id="p-student">Last Name <span>*</span></p>
+        <p id="p-student">Full Name <span>*</span></p>
         <div class="form-group col-md-12">
-          <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Doe">
+          <input formControlName="full_name" type="text" class="form-control" id="fullname" placeholder="John Doe">
         </div>
 
         <p id="p-student">Choose Image <span>*</span></p>
         <div class="form-group col-md-12">
-          <input type="file" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Doe">
+          <input (change)="processFile($event)" formControlName="image" type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="image" placeholder="Doe">
+        </div>
+
+        <p id="p-student">Password <span>*</span></p>
+        <div class="mb-3 d-flex">
+          <input formControlName="password" [type]="displayPass ? 'text' : 'password'" class="form-control" id="password" placeholder="Password">
+          <div class="password-reveal" (mousedown)="displayPassword()" (mouseup)="displayPassword()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="displayPass ? 'visibility_off' : 'visibility'"></mat-icon>
+          </div>
         </div>
       </form>
   
       <div class="center-button right-button ">
-        <button class="btn btn-primary">LOGIN</button>
+        <button (click)="signUp()" class="btn btn-primary">SIGN UP</button>
       </div>
   </div>
 </div>

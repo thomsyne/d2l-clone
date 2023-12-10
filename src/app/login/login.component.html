@@ -10,12 +10,12 @@
         <p>Enter Username & Password</p>
       </div>
   
-      <form formGroup="">
+      <form [formGroup]="loginForm">
         <div class="mb-3">
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Username:">
+          <input formControlName="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Username:">
         </div>
         <div class="mb-3 d-flex">
-          <input [type]="displayPass ? 'text' : 'password'" class="form-control" id="exampleFormControlInput1" placeholder="Password:">
+          <input formControlName="password" [type]="displayPass ? 'text' : 'password'" class="form-control" id="exampleFormControlInput1" placeholder="Password:">
           <div class="password-reveal" (mousedown)="displayPassword()" (mouseup)="displayPassword()">
             <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="displayPass ? 'visibility_off' : 'visibility'"></mat-icon>
           </div>
@@ -37,7 +37,7 @@
       <span id="connect-tagline">connect-02.laurentian.ca</span>
       <div class="bottom-options">
         <p>
-          <span >Forgot password?</span> | <span (click)="signUp()">New to Laurentian? </span> <span>Register here. </span> | <span>Help</span>
+          <span >Forgot password?</span> | <span class="signup" (click)="signUp()">New to Laurentian? </span> <span class="signup" (click)="signUp()" >Register here. </span> | <span>Help</span>
         </p>
       </div>
     </div>

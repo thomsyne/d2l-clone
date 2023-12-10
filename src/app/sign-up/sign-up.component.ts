@@ -1,88 +1,131 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from "ngx-toastr";
+import { first } from "rxjs";
+import { Days, Months, Years } from "src/helpers/constants";
+import { HttpService } from "src/services/http.service";
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  selector: "app-sign-up",
+  templateUrl: "./sign-up.component.html",
+  styleUrls: ["./sign-up.component.scss"],
 })
 export class SignUpComponent implements OnInit {
+  years = Years;
 
-  years = [
-    {"name": "1990", "value": "1990"},
-    {"name": "1991", "value": "1991"},
-    {"name": "1992", "value": "1992"},
-    {"name": "1993", "value": "1993"},
-    {"name": "1994", "value": "1994"},
-    {"name": "1995", "value": "1995"},
-    {"name": "1996", "value": "1996"},
-    {"name": "1997", "value": "1997"},
-    {"name": "1998", "value": "1998"},
-    {"name": "1999", "value": "1999"},
-    {"name": "2000", "value": "2000"},
-    {"name": "2001", "value": "2001"},
-    {"name": "2002", "value": "2002"},
-    {"name": "2003", "value": "2003"},
-    {"name": "2004", "value": "2004"},
-    {"name": "2005", "value": "2005"},
-    {"name": "2006", "value": "2006"},
-    {"name": "2007", "value": "2007"},
-    {"name": "2008", "value": "2008"}
-  ]
+  months = Months;
 
-  months = [
-    {"name": "January", "value": "January"},
-    {"name": "February", "value": "February"},
-    {"name": "March", "value": "March"},
-    {"name": "April", "value": "April"},
-    {"name": "May", "value": "May"},
-    {"name": "June", "value": "June"},
-    {"name": "July", "value": "July"},
-    {"name": "August", "value": "August"},
-    {"name": "September", "value": "September"},
-    {"name": "October", "value": "October"},
-    {"name": "November", "value": "November"},
-    {"name": "December", "value": "December"}
-  ]
-  
-  days = [
-    {"name": "1", "value": "1"},
-    {"name": "2", "value": "2"},
-    {"name": "3", "value": "3"},
-    {"name": "4", "value": "4"},
-    {"name": "5", "value": "5"},
-    {"name": "6", "value": "6"},
-    {"name": "7", "value": "7"},
-    {"name": "8", "value": "8"},
-    {"name": "9", "value": "9"},
-    {"name": "10", "value": "10"},
-    {"name": "11", "value": "11"},
-    {"name": "12", "value": "12"},
-    {"name": "13", "value": "13"},
-    {"name": "14", "value": "14"},
-    {"name": "15", "value": "15"},
-    {"name": "16", "value": "16"},
-    {"name": "17", "value": "17"},
-    {"name": "18", "value": "18"},
-    {"name": "19", "value": "19"},
-    {"name": "20", "value": "20"},
-    {"name": "21", "value": "21"},
-    {"name": "22", "value": "22"},
-    {"name": "23", "value": "23"},
-    {"name": "24", "value": "24"},
-    {"name": "25", "value": "25"},
-    {"name": "26", "value": "26"},
-    {"name": "27", "value": "27"},
-    {"name": "28", "value": "28"},
-    {"name": "29", "value": "29"},
-    {"name": "30", "value": "30"},
-    {"name": "31", "value": "31"}
-  ]
-  
-  
+  days = Days;
 
-  constructor() { }
+  signUpForm!: FormGroup;
+  displayPass: boolean = false;
+
+  uploadMessage: string = "";
+  filename: string = "";
+  imageUrl: string = "";
+
+  constructor(
+    private readonly router: Router,
+    private toastr: ToastrService,
+    private httpService: HttpService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
+    this.buildForm();
   }
 
+  displayPassword() {
+    this.displayPass = !this.displayPass;
+  }
+
+  buildForm() {
+    this.signUpForm = new FormGroup({
+      email: new FormControl("", [Validators.required, Validators.email]),
+      year: new FormControl("", [Validators.required]),
+      month: new FormControl("", [Validators.required]),
+      day: new FormControl("", [Validators.required]),
+      full_name: new FormControl("", [Validators.required]),
+      image: new FormControl(""),
+      image_url: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required]),
+    });
+  }
+
+  signUp() {
+
+    if (this.signUpForm.invalid) {
+      this.toastr.error("Please fill in all the required fields");
+      return;
+    }
+
+    this.spinner.show();
+
+    let payload = {
+      email: this.signUpForm.value.email,
+      dob:
+        this.signUpForm.value.year +
+        "-" +
+        this.signUpForm.value.month +
+        "-" +
+        this.signUpForm.value.day,
+      full_name: this.signUpForm.value.full_name,
+      image_url: this.signUpForm.value.image_url,
+      password: this.signUpForm.value.password,
+      roles: ["user", "moderator"],
+    };
+
+    this.httpService.authSignup(payload).subscribe(
+      (res) => {
+        this.spinner.hide();
+        if (res.message == "User was registered successfully!") {
+          this.toastr.success(res.message);
+          this.router.navigate(["/login"]);
+        }
+      },
+      (err) => {
+        this.spinner.hide();
+        this.toastr.error(err.error.message);
+      }
+    );
+  }
+
+  processFile(event: any) {
+    console.log(event)
+    this.spinner.show();
+    if (event.target.files[0].size > 1048576) {
+      this.uploadMessage = `${event.target.files[0].name} cannot be uploaded because it is too large,file should be less than or equals 1mb`;
+      this.spinner.hide();
+    } else {
+      const formData: FormData = new FormData();
+      this.filename = event.target.files[0].name;
+      formData.append("file", event.target.files[0], this.filename);
+      this.httpService
+        .uploadImage(formData)
+        .pipe(first())
+        .subscribe(
+          (res) => {
+            if (res.message == "Upload was successful") {
+              this.uploadMessage = `${this.filename} was successfully uploaded.`;
+              this.toastr.success(this.uploadMessage);
+              this.imageUrl = res.data;
+              this.signUpForm.patchValue({
+                image_url: this.imageUrl
+              })
+              this.spinner.hide();
+            } else {
+              this.toastr.error(res.message);
+              this.uploadMessage = `${this.filename} could not be uploaded.`;
+              this.spinner.hide();
+            }
+          },
+          (err) => {
+            this.uploadMessage = err.error.message;
+            this.spinner.hide();
+          }
+        );
+    }
+  }
 }

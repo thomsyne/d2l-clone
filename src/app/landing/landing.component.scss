@@ -1,0 +1,189 @@
+.landing {
+  border-top: 4px solid #351c74;
+  font-family: 'Lato', sans-serif;
+  p, h6 {
+    font-family: 'Lato', sans-serif;
+  }
+  .wrapper {
+    
+    padding: 20px 0;
+
+    .heading {
+      .navigation {
+        display: flex;
+        width: inherit;
+        justify-content: space-between;
+        width: 70%;
+        margin: auto;
+        //   align-items: center;
+
+        .left-nav,
+        .right-nav {
+          display: flex;
+          align-items: center;
+        }
+        .left-nav {
+          #home {
+            color: #494c4e;
+          }
+          .more {
+            color: #cdd5db;
+          }
+          img {
+            max-height: 60px;
+            max-width: 260px;
+            vertical-align: middle;
+          }
+        }
+        .right-nav {
+          float: right;
+
+          img, mat-icon {
+            margin: 0 10px
+          }
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+
+          .more {
+            color: #cdd5db;
+          }
+          .icon{
+            color: #494C4E;
+            height: 30px;
+            width: 30px;
+            display: block;
+          }
+          .settings {
+            display: flex;
+            align-items: center;
+          }
+
+          .initial {
+            height: 42px;
+            width: 42px;
+            background-color: #20826B;
+            color: #fff;
+            border-radius: 6px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            margin: 0px;
+            text-align: center;
+            font-weight: 600;
+          }
+          #name {
+            margin: 0px 10px;
+          }
+        }
+      }
+
+      .mid-nav {
+        padding-bottom: 12px;
+        .left-nav {
+            gap: 18px;
+            p {
+                font-size: 19px;
+            }
+        }
+      }
+    }
+
+    .body {
+        background-color: #F6F7F8;
+        padding: 26px 0;
+        .banner {
+            display: flex;
+            img {
+                margin: auto;
+                width: 72%;
+                height: 9%;
+            }
+        }
+        .sections {
+            width: 70%;
+            margin: auto;
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+
+            .left, .right {
+                width: 48%;
+                border-radius: 10px;
+                margin: 30px 0;
+
+                h6 {
+                    font-weight: 700;
+                }
+            }
+            .left {
+                background-color: #fff;
+                padding: 20px;
+                .course-wrapper {
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    width: 100%;
+                    gap: 20px;
+                    .course-item {
+                        border: 1px solid #E3E9F0;
+                        height: auto;
+                        border-radius: 10px;
+                        img {
+                            width: 100%;
+                            border-top-left-radius: 10px;
+                            border-top-right-radius: 10px;
+                        }
+                        .details {
+                            padding: 20px 20px;
+                            h4 {
+                                font-weight: 400;
+                                font-size: 1.2rem;
+                                color: #202122;
+                                line-height: 1.8rem;
+                            }
+                            p {
+                                color: #494C4E;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+            .right {
+                background-color: transparent;
+                .card-lite {
+                    background-color: #fff;
+                    padding: 20px 20px 40px 20px;
+                    border-radius: 10px;
+
+                    p {
+                        margin: 16px 0;
+                        font-size: 15px;
+                    }
+
+                    .upcoming {
+                        padding: 6px;
+                        h5 {
+                            font-weight: 600;
+                            font-size: 1.2rem;
+                        }
+                        p {
+                            font-size: 13px;
+                            margin: 2px 0;
+                        }
+                    }
+
+                    .light {
+                        background-color: #F3F3F3;
+                    }
+                    .dark {
+                        background-color: #DDDDDD;
+                    }
+                }
+            }
+        }
+    }
+  }
+}
