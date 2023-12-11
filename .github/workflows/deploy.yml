@@ -32,7 +32,7 @@ jobs:
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
-        workload_identity_provider: 'projects/76621810654/locations/global/workloadIdentityPools/d2l-pool/providers/github-provider'
+        workload_identity_provider: 'projects/76621810654/locations/global/workloadIdentityPools/d2l-pool/providers/d2l-provider'
         service_account: 'd2l-181@arctic-cyclist-398917.iam.gserviceaccount.com'
 
     - id: 'upload-folder'
