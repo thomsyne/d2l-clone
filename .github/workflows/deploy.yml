@@ -24,9 +24,14 @@ jobs:
     - name: Build Angular App
       run: npm run build -- --prod
 
-    - name: Deploy to Google Cloud Storage
-      uses: google-github-actions/deploy-cloud-storage@v0.6.0
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
       with:
-        path: dist/d2l-clone  # Replace with the path to your build directory
-        bucket: ${{ secrets.GCS_BUCKET }}
-        credentials: ${{ secrets.GCS_SA_KEY }}
+        workload_identity_provider: 'projects/76621810654/locations/global/workloadIdentityPools/d2l-pool/providers/d2l-provider'
+        service_account: 'd2l-181@arctic-cyclist-398917.iam.gserviceaccount.com'
+
+    - id: 'upload-folder'
+      uses: 'google-github-actions/upload-cloud-storage@v1'
+      with:
+        path: 'dist/d2l-clone'
+        destination: 'd2l-fe'
